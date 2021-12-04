@@ -50,7 +50,7 @@ var ScratchArea = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      var cover = this.props.cover;
+      var cover = this.props.canvas;
 
       this.isDrawing = false;
       this.lastPoint = null;
@@ -62,7 +62,7 @@ var ScratchArea = function (_React$Component) {
         var image = new Image();
         image.crossOrigin = "Anonymous";
         image.onload = function () {
-          _this2.ctx.drawImage(image, 0, 0);
+          _this2.ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, _this2.ctx.canvas.width, _this2.ctx.canvas.height);
           _this2.setState({ loaded: true });
         };
         image.src = cover;
@@ -188,11 +188,11 @@ var ScratchArea = function (_React$Component) {
       var _props = this.props,
           width = _props.width,
           height = _props.height,
-          cover = _props.cover,
+          cover = _props.canvas,
           finishPercent = _props.finishPercent,
           onComplete = _props.onComplete,
           className = _props.className,
-          attr = _objectWithoutProperties(_props, ['width', 'height', 'cover', 'finishPercent', 'onComplete', 'className']);
+          attr = _objectWithoutProperties(_props, ['width', 'height', 'canvas', 'finishPercent', 'onComplete', 'className']);
 
       var loaded = this.state.loaded;
 
@@ -253,7 +253,7 @@ var ScratchArea = function (_React$Component) {
 }(_react2.default.Component);
 
 ScratchArea.propTypes = {
-  cover: _propTypes2.default.string.isRequired,
+  canvas: _propTypes2.default.string.isRequired,
   width: _propTypes2.default.number.isRequired,
   height: _propTypes2.default.number.isRequired,
   finishPercent: _propTypes2.default.number.isRequired,
