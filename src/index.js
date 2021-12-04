@@ -24,8 +24,12 @@ class ScratchArea extends React.Component {
       const image = new Image();
       image.crossOrigin = "Anonymous";
       image.onload = () => {
-        this.ctx.drawImage(image, 0, 0, image.width,    image.height,
-            0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+
+        let scale = Math.max(this.ctx.canvas.width / image.width, this.ctx.canvas.height / image.height);
+        let x = (this.ctx.canvas.width / 2) - (image.width / 2) * scale;
+        let y = (this.ctx.canvas.height / 2) - (image.height / 2) * scale;
+        this.ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
+
         this.setState({ loaded: true });
       }
       image.src = cover;
@@ -39,7 +43,6 @@ class ScratchArea extends React.Component {
       this.ctx.restore()
       this.setState({ loaded: true });
     }
-
   }
 
   checkColorCover(cover) {

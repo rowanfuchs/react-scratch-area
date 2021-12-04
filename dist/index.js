@@ -62,7 +62,12 @@ var ScratchArea = function (_React$Component) {
         var image = new Image();
         image.crossOrigin = "Anonymous";
         image.onload = function () {
-          _this2.ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, _this2.ctx.canvas.width, _this2.ctx.canvas.height);
+
+          var scale = Math.max(_this2.ctx.canvas.width / image.width, _this2.ctx.canvas.height / image.height);
+          var x = _this2.ctx.canvas.width / 2 - image.width / 2 * scale;
+          var y = _this2.ctx.canvas.height / 2 - image.height / 2 * scale;
+          _this2.ctx.drawImage(image, x, y, image.width * scale, image.height * scale);
+
           _this2.setState({ loaded: true });
         };
         image.src = cover;
